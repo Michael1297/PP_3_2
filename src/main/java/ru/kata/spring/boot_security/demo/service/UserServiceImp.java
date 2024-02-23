@@ -55,6 +55,7 @@ public class UserServiceImp implements UserService {
       existingUser.setFirstName(user.getFirstName());
       existingUser.setLastName(user.getLastName());
       existingUser.setEmail(user.getEmail());
+      existingUser.setAge(user.getAge());
       existingUser.setRoles(user.getRoles());
 
       //не кодировать повторно пароль если он не был изменен

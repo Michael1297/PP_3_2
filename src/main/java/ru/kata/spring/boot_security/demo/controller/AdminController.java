@@ -1,6 +1,9 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +27,12 @@ public class AdminController {
     }
 
     @GetMapping("/")
-    public String getUsers(Model model) {
+    public String adminForm(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User admin = userService.findUserByEmail(userDetails.getUsername());
+
+        model.addAttribute("admin", admin);
         model.addAttribute("usersList", userService.listUsers());
         return "users";
     }

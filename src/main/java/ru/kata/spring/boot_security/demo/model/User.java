@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Set;
 
@@ -28,6 +29,10 @@ public class User implements UserDetails {
    @NotEmpty(message = "Last name should not be empty")
    @Column(name = "last_name")
    private String lastName;
+
+   @NotNull
+   @Column(name = "age", nullable = false)
+   private int age;
 
    @NotEmpty(message = "Email should not be empty")
    @Column(name = "email", nullable = false, unique = true)
@@ -73,6 +78,14 @@ public class User implements UserDetails {
 
    public void setLastName(String lastName) {
       this.lastName = lastName;
+   }
+
+   public int getAge() {
+      return age;
+   }
+
+   public void setAge(int age) {
+      this.age = age;
    }
 
    public String getEmail() {
