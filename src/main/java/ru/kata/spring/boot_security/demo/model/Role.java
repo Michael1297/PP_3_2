@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "roles")
-public class Role implements GrantedAuthority {
+public class Role implements GrantedAuthority, Comparable<Role> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
@@ -36,10 +36,6 @@ public class Role implements GrantedAuthority {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public String getAuthority() {
         return name;
@@ -48,5 +44,10 @@ public class Role implements GrantedAuthority {
     @Override
     public String toString() {
         return name.replaceFirst("^ROLE_", "");
+    }
+
+    @Override
+    public int compareTo(Role role) {
+        return name.compareTo(role.name);
     }
 }
