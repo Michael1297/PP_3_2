@@ -65,7 +65,7 @@
     <div id="updateModal" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="POST">
+                <form>
                     <input th:name="${_csrf.parameterName}" type="hidden" th:value="${_csrf.token}" />
 
                     <div class ="form-group">
@@ -193,6 +193,7 @@
 
                 //указание ссылки на изменения данных при нажатии на кнопку
                 $modal.find('form').attr('action', './edit/' + user.id);
+                $modal.find('form').attr('method', 'POST');
 
                 //добавить кнопку
                 const button = $('<button type="submit" class="btn btn-success">Submit</button>');
@@ -217,7 +218,7 @@
 
                 //указание ссылки на изменения данных при нажатии на кнопку
                 $modal.find('form').attr('action', './remove/' + user.id);
-                $modal.find('form').attr('method', 'GET'); //TODO REMOVE
+                $modal.find('form').attr('method', 'GET');
 
                 //добавить кнопку
                 const button = $('<button type="submit" class="btn btn-danger">Remove</button>');
