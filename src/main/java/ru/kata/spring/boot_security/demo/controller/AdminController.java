@@ -34,6 +34,7 @@ public class AdminController {
 
         model.addAttribute("admin", admin);
         model.addAttribute("usersList", userService.listUsers());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "users";
     }
 
@@ -76,6 +77,7 @@ public class AdminController {
                            @ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult,
                            Model model) {
+        System.err.println("editUser");
         if (bindingResult.hasErrors()) {
             model.addAttribute("user", user);
             model.addAttribute("roles", roleService.getAllRoles());
