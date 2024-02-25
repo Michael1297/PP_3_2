@@ -50,7 +50,7 @@
                 <td th:text="${user.email}"></td>
                 <td th:text="${#strings.setJoin(user.roles, ' ')}"></td>
                 <td><button class = "btn update btn-primary" th:data-user="${user}">Update</button></td>
-                <td><a th:href = "@{./remove/{id}(id=${user.id})}" class = "btn btn-danger">Remove</a></td>
+                <td><button class = "btn remove btn-danger" th:data-user="${user}">Remove</button></td>
             </tr>
 
             <!-- Добавления пользователя в таблицу -->
@@ -90,7 +90,6 @@
                                     placeholder="Enter User First Name"
                             />
                         </label>
-                        <!-- <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="firstName">First Name Error</div> -->
                     </div>
 
                     <div class ="form-group">
@@ -103,7 +102,6 @@
                                     placeholder="Enter User Last Name"
                             />
                         </label>
-                        <!-- <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="lastName">Last Name Error</div> -->
                     </div>
 
                     <div class ="form-group">
@@ -117,7 +115,6 @@
                                     min="0"
                             />
                         </label>
-                        <!-- <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="age">Age Error</div> -->
                     </div>
 
                     <div class ="form-group">
@@ -130,7 +127,6 @@
                                     placeholder="Enter User Email"
                             />
                         </label>
-                        <!-- <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="email">Email Error</div> -->
                     </div>
 
                     <div class ="form-group">
@@ -143,7 +139,6 @@
                                     placeholder="Enter User Password"
                             />
                         </label>
-                        <!-- <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="password">Password Error</div> -->
                     </div>
 
                     <div class ="form-group">
@@ -154,14 +149,9 @@
                                     th:text="${role}">
                             </option>
                         </select>
-                        <!-- <div style="color: red" th:if="${#fields.hasErrors('roles')}" th:errors="roles">Role Error</div> -->
                     </div>
 
-                    <div class = "box-footer">
-                        <button type="submit" class = "btn btn-success">
-                            Submit
-                        </button>
-                    </div>
+                    <div class = "box-footer"></div>
                 </form>
             </div>
         </div>
@@ -172,31 +162,66 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
     <script>
-        $(function(){
-            $("button.btn.update.btn-primary").click(function(){
-                const $modal = $('#updateModal').clone();
-                const $btn = $(this);
-                const user = JSON.parse($btn.attr('data-user'));
+        function createModal(user) {
+            const $modal = $('#updateModal').clone();
 
-                $modal.find('[name="id"]').val(user.id);
-                $modal.find('[name="firstName"]').val(user.firstName);
-                $modal.find('[name="lastName"]').val(user.lastName);
-                $modal.find('[name="age"]').val(user.age);
-                $modal.find('[name="email"]').val(user.email);
-                $modal.find('[name="password"]').val(user.password);
+            //установить значения для полей
+            $modal.find('[name="id"]').val(user.id);
+            $modal.find('[name="firstName"]').val(user.firstName);
+            $modal.find('[name="lastName"]').val(user.lastName);
+            $modal.find('[name="age"]').val(user.age);
+            $modal.find('[name="email"]').val(user.email);
+            $modal.find('[name="password"]').val(user.password);
 
-                //сделать чтобы роли у пользователя были выбраны
-                const roles = $modal.find('[name="roles"] > option');
-                for (const role of roles) {
-                    for (const userRole of user.roles) {
-                        if (role.text === userRole.name.replace(/^ROLE_/, "")){
-                            role.selected = true;
-                        }
+            //сделать чтобы роли у пользователя были выбраны
+            const roles = $modal.find('[name="roles"] > option');
+            for (const role of roles) {
+                for (const userRole of user.roles) {
+                    if (role.text === userRole.name.replace(/^ROLE_/, "")){
+                        role.selected = true;
                     }
                 }
+            }
+            return $modal;
+        }
+
+        $(function(){
+            $("button.btn.update.btn-primary").click(function(){
+                const $btn = $(this);
+                const user = JSON.parse($btn.attr('data-user'));
+                const $modal = createModal(user);
 
                 //указание ссылки на изменения данных при нажатии на кнопку
                 $modal.find('form').attr('action', './edit/' + user.id);
+
+                //добавить кнопку
+                const button = $('<button type="submit" class="btn btn-success">Submit</button>');
+                $modal.find('.box-footer').append(button);
+
+                //show dialog
+                $modal.modal();
+            });
+
+            $("button.btn.remove.btn-danger").click(function() {
+                const $btn = $(this);
+                const user = JSON.parse($btn.attr('data-user'));
+                const $modal = createModal(user);
+
+                //выключить поля
+                $modal.find('[name="firstName"]').prop('disabled', true);
+                $modal.find('[name="lastName"]').prop('disabled', true);
+                $modal.find('[name="age"]').prop('disabled', true);
+                $modal.find('[name="email"]').prop('disabled', true);
+                $modal.find('[name="password"]').prop('disabled', true);
+                $modal.find('[name="roles"]').prop('disabled', true);
+
+                //указание ссылки на изменения данных при нажатии на кнопку
+                $modal.find('form').attr('action', './remove/' + user.id);
+                $modal.find('form').attr('method', 'GET'); //TODO REMOVE
+
+                //добавить кнопку
+                const button = $('<button type="submit" class="btn btn-danger">Remove</button>');
+                $modal.find('.box-footer').append(button);
 
                 //show dialog
                 $modal.modal();
