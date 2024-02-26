@@ -32,7 +32,7 @@ public class AdminController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User admin = userService.findUserByEmail(userDetails.getUsername());
 
-        model.addAttribute("admin", admin);
+        model.addAttribute("user", admin);
         model.addAttribute("usersList", userService.listUsers());
         model.addAttribute("roles", roleService.getAllRoles());
         return "users";
