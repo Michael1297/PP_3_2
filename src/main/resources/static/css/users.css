@@ -1,0 +1,15 @@
+.modal-header {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: normal;
+}
+
+label {
+    display: grid;
+    justify-content: space-around;
+}
+
+.btn-close {
+    background-color: gray;
+    border-color: gray;
+}
