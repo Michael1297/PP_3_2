@@ -11,43 +11,34 @@
     <link th:href="@{/css/users.css}" rel="stylesheet">
 </head>
 <body>
+    <!-- Заголовок окна -->
     <div th:replace="fragments/header :: header"></div>
 
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Age</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Вывод пользователей -->
-            <tr th:each="user:${usersList}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.age}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${#strings.setJoin(user.roles, ' ')}"></td>
-                <td><button class = "btn update btn-info" th:data-user="${user}">Edit</button></td>
-                <td><button class = "btn remove btn-danger" th:data-user="${user}">Delete</button></td>
-            </tr>
+    <div class="container-fluid">
+        <nav>
+            <div class="nav nav-tabs border-bottom-0" role="tablist">
+                <a class="nav-link active" data-toggle="tab" href="#table" role="tab">Users table</a>
+                <a class="nav-link" data-toggle="tab" href="#create" role="tab">New user</a>
+            </div>
+        </nav>
 
-            <!-- Добавления пользователя в таблицу -->
-            <tr>
-                <td>
-                    <a th:href = "@{./create/}" class = "btn btn-primary">Create</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade show active" id="table">
+                <div class="row border">
+                    <h5 class="m-2">All users</h5>
+                </div>
+                <div class="row border bg-white pb-2">
+                    <!-- Таблица пользователей -->
+                    <div th:replace="fragments/users-table :: users-table"></div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="create">
+                create
+            </div>
+        </div>
+    </div>
 
+    <!-- Форма для ввода данных -->
     <div th:replace="fragments/modal-form :: modal-form"></div>
 
     <!-- jQuery and Bootstrap Bundle -->
