@@ -28,8 +28,8 @@
                     <h5 class="m-2">All users</h5>
                 </div>
                 <div class="row border bg-white pb-2">
-                    <!-- Таблица пользователей -->
-                    <div th:replace="fragments/users-table :: users-table"></div>
+                    <!-- Таблица пользователей которая доступна админу -->
+                    <div th:replace="fragments/admin-table :: admin-table"></div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="create">
