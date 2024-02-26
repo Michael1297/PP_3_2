@@ -12,12 +12,12 @@
         </tr>
         </thead>
         <tbody th:object = "${user}">
-        <td th:text="*{id}"></td>
-        <td th:text="*{firstName}"></td>
-        <td th:text="*{lastName}"></td>
-        <td th:text="*{age}"></td>
-        <td th:text="*{email}"></td>
-        <td th:text="*{#strings.setJoin(user.roles, ' ')}"></td>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${#strings.setJoin(user.roles, ' ')}"></td>
         </tbody>
     </table>
 </div>

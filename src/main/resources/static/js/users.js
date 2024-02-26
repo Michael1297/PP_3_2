@@ -12,10 +12,8 @@ function createModal(user) {
     //сделать чтобы роли у пользователя были выбраны
     const roles = $modal.find('[name="roles"] > option');
     for (const role of roles) {
-        for (const userRole of user.roles) {
-            if (role.text === userRole.name.replace(/^ROLE_/, "")){
-                role.selected = true;
-            }
+        if (user.rolesList.includes(role.text)) {
+            role.selected = true;
         }
     }
     return $modal;

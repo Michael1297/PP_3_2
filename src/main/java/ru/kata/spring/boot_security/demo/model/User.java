@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.annotations.Fetch;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -101,6 +103,7 @@ public class User implements UserDetails {
    }
 
    @Override
+   @JsonIgnore
    public Collection<? extends GrantedAuthority> getAuthorities() {
       return roles;
    }
@@ -114,8 +117,14 @@ public class User implements UserDetails {
       this.password = password;
    }
 
+   @JsonIgnore
    public Set<Role> getRoles() {
       return roles;
+   }
+
+   //получить список ролей содержащий только с их названия
+   public List<String> getRolesList() {
+      return roles.stream().map(Role::toString).toList();
    }
 
    public void setRoles(Set<Role> roles) {
@@ -123,26 +132,31 @@ public class User implements UserDetails {
    }
 
    @Override
+   @JsonIgnore
    public String getUsername() {
       return email;
    }
 
    @Override
+   @JsonIgnore
    public boolean isAccountNonExpired() {
       return true;
    }
 
    @Override
+   @JsonIgnore
    public boolean isAccountNonLocked() {
       return true;
    }
 
    @Override
+   @JsonIgnore
    public boolean isCredentialsNonExpired() {
       return true;
    }
 
    @Override
+   @JsonIgnore
    public boolean isEnabled() {
       return true;
    }

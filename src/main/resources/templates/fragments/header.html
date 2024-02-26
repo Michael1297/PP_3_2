@@ -4,7 +4,7 @@
         <dl class="row p-2 bg-dark">
             <div class="col-11 text-left">
                 <span class="text-white" style="font-size: large">
-                    <strong><a th:text="*{email}"></a></strong>
+                    <strong><a th:text="${user.email}"></a></strong>
                     with roles:
                     <a th:text="${#strings.setJoin(user.roles, ' ')}"></a>
                 </span>
