@@ -22,7 +22,7 @@ function createModal(user) {
 }
 
 $(function(){
-    $("button.btn.update.btn-primary").click(function(){
+    $("button.btn.update").click(function(){
         const $btn = $(this);
         const user = JSON.parse($btn.attr('data-user'));
         const $modal = createModal(user);
@@ -43,7 +43,7 @@ $(function(){
         $modal.modal();
     });
 
-    $("button.btn.remove.btn-danger").click(function() {
+    $("button.btn.remove").click(function() {
         const $btn = $(this);
         const user = JSON.parse($btn.attr('data-user'));
         const $modal = createModal(user);
@@ -61,7 +61,7 @@ $(function(){
         $modal.find('form').attr('method', 'GET');
 
         //добавить кнопку
-        const button = $('<button type="submit" class="btn btn-danger">Remove</button>');
+        const button = $('<button type="submit" class="btn btn-danger">Delete</button>');
         $modal.find('.modal-footer').append(button);
 
         //Заголовок модального окна

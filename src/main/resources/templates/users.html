@@ -35,8 +35,8 @@
                 <td th:text="${user.age}"></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${#strings.setJoin(user.roles, ' ')}"></td>
-                <td><button class = "btn update btn-primary" th:data-user="${user}">Update</button></td>
-                <td><button class = "btn remove btn-danger" th:data-user="${user}">Remove</button></td>
+                <td><button class = "btn update btn-info" th:data-user="${user}">Edit</button></td>
+                <td><button class = "btn remove btn-danger" th:data-user="${user}">Delete</button></td>
             </tr>
 
             <!-- Добавления пользователя в таблицу -->
