@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
@@ -148,6 +149,10 @@ public class User implements UserDetails {
 
    @Override
    public String toString() {
-      return new GsonBuilder().create().toJson(this);
+       try {
+           return new ObjectMapper().writeValueAsString(this);
+       } catch (JsonProcessingException e) {
+           throw new RuntimeException(e);
+       }
    }
 }
