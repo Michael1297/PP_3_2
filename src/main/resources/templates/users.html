@@ -33,7 +33,13 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="create">
-                create
+                <div class="row border">
+                    <h5 class="m-2">Add new user</h5>
+                </div>
+                <div class="row border create-form bg-white pb-2">
+                    <!-- Форма для создания пользователя -->
+                    <div th:replace="fragments/create-form :: create-form"></div>
+                </div>
             </div>
         </div>
     </div>
