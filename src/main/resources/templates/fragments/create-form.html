@@ -11,6 +11,7 @@
                         name = "firstName"
                         class = "form-control"
                         placeholder="Enter User First Name"
+                        required
                 />
             </label>
         </div>
@@ -23,6 +24,7 @@
                         name = "lastName"
                         class = "form-control"
                         placeholder="Enter User Last Name"
+                        required
                 />
             </label>
         </div>
@@ -36,6 +38,7 @@
                         class = "form-control"
                         placeholder="Enter User Age"
                         min="0"
+                        required
                 />
             </label>
         </div>
@@ -48,6 +51,7 @@
                         name = "email"
                         class = "form-control"
                         placeholder="Enter User Email"
+                        required
                 />
             </label>
         </div>
@@ -60,16 +64,18 @@
                         name = "password"
                         class = "form-control"
                         placeholder="Enter User Password"
+                        required
                 />
             </label>
         </div>
 
         <div class ="form-group">
             <label for="newRoles"><strong> Role </strong></label>
-            <select multiple class="form-control" id="newRoles" name="roles">
+            <select multiple class="form-control" id="newRoles" name="roles" required>
                 <option th:each="role: ${roles}"
                         th:value="${role.id}"
-                        th:text="${role}">
+                        th:text="${role}"
+                >
                 </option>
             </select>
         </div>
