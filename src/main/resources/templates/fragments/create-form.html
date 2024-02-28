@@ -65,8 +65,8 @@
         </div>
 
         <div class ="form-group">
-            <label for="roles"><strong> Role </strong></label>
-            <select multiple class="form-control" id="roles" name="roles">
+            <label for="newRoles"><strong> Role </strong></label>
+            <select multiple class="form-control" id="newRoles" name="roles">
                 <option th:each="role: ${roles}"
                         th:value="${role.id}"
                         th:text="${role}">
