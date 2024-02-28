@@ -26,8 +26,10 @@ public class UserServiceImp implements UserService {
    @Transactional
    @Override
    public void add(User user) {
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
-      userRepository.save(user);
+      if (findUserByEmail(user.getEmail()) == null) {
+         user.setPassword(passwordEncoder.encode(user.getPassword()));
+         userRepository.save(user);
+      }
    }
 
    @Transactional(readOnly = true)
