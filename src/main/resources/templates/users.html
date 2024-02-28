@@ -29,8 +29,8 @@
         </div>
 
         <div class="flex-grow-1 bg-light p-3">
-            <!-- <div th:replace="fragments/admin-panel :: admin-panel"></div> -->
-            <div th:replace="fragments/user-panel :: user-panel"></div>
+            <div th:replace="fragments/admin-panel :: admin-panel"></div>
+            <div class="user-panel" style="display: none" th:include ="fragments/user-panel :: user-panel"></div>
         </div>
     </div>
 
