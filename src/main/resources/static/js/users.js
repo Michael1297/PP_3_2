@@ -26,7 +26,7 @@ $(function(){
         const $modal = createModal(user);
 
         //указание ссылки на изменения данных при нажатии на кнопку
-        $modal.find('form').attr('action', './edit/' + user.id);
+        $modal.find('form').attr('action', `./edit/${user.id}`);
         $modal.find('form').attr('method', 'POST');
 
         //добавить кнопку
@@ -55,7 +55,7 @@ $(function(){
         $modal.find('[name="roles"]').prop('disabled', true);
 
         //указание ссылки на изменения данных при нажатии на кнопку
-        $modal.find('form').attr('action', './remove/' + user.id);
+        $modal.find('form').attr('action', `./remove/${user.id}`);
         $modal.find('form').attr('method', 'GET');
 
         //добавить кнопку
