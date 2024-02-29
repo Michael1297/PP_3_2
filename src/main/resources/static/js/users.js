@@ -35,9 +35,14 @@ function updateUserTable(user) {
 }
 
 $(function(){
+    //нажатие на кнопку обновить в таблице администратора
     $("button.btn.update").click(function(){
-        const $btn = $(this);
-        const user = JSON.parse($btn.attr('data-user'));
+        //получить имя пользователя
+        const userName = $(this).attr('name');
+        //получить данные пользователя
+        const userData = $(`.users-list  a[type="button"][name=${userName}]`).attr('data-user');
+
+        const user = JSON.parse(userData);
         const $modal = createModal(user);
 
         //указание ссылки на изменения данных при нажатии на кнопку
@@ -56,9 +61,14 @@ $(function(){
         $modal.modal();
     });
 
+    //нажатие на кнопку удалить в таблице администратора
     $("button.btn.remove").click(function() {
-        const $btn = $(this);
-        const user = JSON.parse($btn.attr('data-user'));
+        //получить имя пользователя
+        const userName = $(this).attr('name');
+        //получить данные пользователя
+        const userData = $(`.users-list  a[type="button"][name=${userName}]`).attr('data-user');
+
+        const user = JSON.parse(userData);
         const $modal = createModal(user);
 
         //выключить поля
@@ -85,6 +95,7 @@ $(function(){
         $modal.modal();
     });
 
+    //нажатие на одного из пользователей в списке
     $('.users-list  a[type="button"]').click(function(){
         const $btn = $(this);
 
