@@ -40,7 +40,7 @@ $(function(){
         //получить имя пользователя
         const userName = $(this).attr('name');
         //получить данные пользователя
-        const userData = $(`.users-list  a[type="button"][name=${userName}]`).attr('data-user');
+        const userData = $(`.users-list  a[type="button"][name="${userName}"]`).attr('data-user');
 
         const user = JSON.parse(userData);
         const $modal = createModal(user);
@@ -66,7 +66,7 @@ $(function(){
         //получить имя пользователя
         const userName = $(this).attr('name');
         //получить данные пользователя
-        const userData = $(`.users-list  a[type="button"][name=${userName}]`).attr('data-user');
+        const userData = $(`.users-list  a[type="button"][name="${userName}"]`).attr('data-user');
 
         const user = JSON.parse(userData);
         const $modal = createModal(user);
