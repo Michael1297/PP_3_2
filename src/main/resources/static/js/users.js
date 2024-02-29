@@ -19,6 +19,21 @@ function createModal(user) {
     return $modal;
 }
 
+function updateUserTable(user) {
+    const $table = $('.user-panel  table  tbody');
+    $table.find('tr').remove();
+    const row =
+        `<tr>
+            <td>${user.id}</td>>
+            <td>${user.firstName}</td>>
+            <td>${user.lastName}</td>>
+            <td>${user.age}</td>>
+            <td>${user.email}</td>>
+            <td>${user.rolesList}</td>>
+        </tr>`;
+    $table.append(row);
+}
+
 $(function(){
     $("button.btn.update").click(function(){
         const $btn = $(this);
@@ -68,5 +83,23 @@ $(function(){
 
         //show dialog
         $modal.modal();
+    });
+
+    $('.users-list  a[type="button"]').click(function(){
+        const $btn = $(this);
+
+        //заменить btn-light на btn-primary
+        $('.users-list  a[type="button"][class*="btn-primary"]').toggleClass('btn-primary btn-light');
+        $btn.toggleClass('btn-light btn-primary');
+
+        const user = JSON.parse($btn.attr('data-user'));
+        if(user.rolesList.includes('ADMIN')) {
+            $('.admin-panel').css('display', 'block');
+            $('.user-panel').css('display', 'none');
+        } else {
+            $('.admin-panel').css('display', 'none');
+            $('.user-panel').css('display', 'block');
+            updateUserTable(user);
+        }
     });
 });
