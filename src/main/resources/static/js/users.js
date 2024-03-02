@@ -12,9 +12,7 @@ function createModal(user) {
     //сделать чтобы роли у пользователя были выбраны
     const roles = $modal.find('[name="roles"] > option');
     for (const role of roles) {
-        if (user.rolesList.includes(role.text)) {
-            role.selected = true;
-        }
+        role.selected = user.rolesList.includes(role.text);
     }
     return $modal;
 }
@@ -29,7 +27,7 @@ function updateUserTable(user) {
             <td>${user.lastName}</td>>
             <td>${user.age}</td>>
             <td>${user.email}</td>>
-            <td>${user.rolesList}</td>>
+            <td>${user.rolesList.join(' ')}</td>>
         </tr>`;
     $table.append(row);
 }
